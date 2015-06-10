@@ -1,0 +1,9 @@
+{
+	"dependencies": {
+
+	},
+	"devDependencies": {
+		"webpack": "",
+		"babel-loader": "^1.1.1"
+	}
+}

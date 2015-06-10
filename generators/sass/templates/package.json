@@ -1,0 +1,16 @@
+{
+	"dependencies": {
+		"node-noop": ""
+	},
+	"devDependencies": {
+		"webpack": "",
+		"extract-text-webpack-plugin": "",
+		"sass-loader": "",
+		"style-loader": "",
+		"css-loader": "",
+		"font-loader": "",
+		"icon-loader": "",
+		"autoprefixer-loader": "",
+		"node-sass": ""
+	}
+}
