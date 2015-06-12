@@ -3,26 +3,34 @@ var fs = require('fs'),
 	glob = require('glob'),
 	path = require('path');
 
-function modules(dir) {
-	return glob.sync(dir).map(function load(x) {
-		return require(x);
-	});
+function merge(destination, target) {
+	
 }
 
-modules('./externals/*.external.js');
-modules('./loaders/*.loader.js');
+/**
+ * Merge all configurations in dir into config.
+ * @param {Object} config [description]
+ * @param {String} dir [description]
+ * @returns {Object} [description]
+ */
+function load(config, dir) {
+	return glob.sync(dir).map(function(file) {
+		return require(file);
+	}).reduce(function load(local) {
+		return merge(config, local);
+	}, config);
+}
 
-var entry = {
+// ES6 support
+require('babel-core/register');
+
+// Create initial configuration
+var config = {
 
 };
 
-module.exports = {
-	entry: entry,
-	output: output,
-	externals: externals,
-	resolve: resolve,
-	loaders: loaders,
-	// Enable source-maps, which are pretty handy for debugging after the code
-	// gets mangled from all the transformations that will be happening to it.
-	devtool: 'source-map'
-};
+// Load all the webpack settings
+config = load(config, path.join('config', 'webpack', '*.webpack.config.js'));
+
+// Export everything.
+module.exports = config;

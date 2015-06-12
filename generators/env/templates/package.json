@@ -1,5 +1,5 @@
 {
 	"devDependencies": {
-		"webpack": ""
+		"dotenv": "^1.1.0"
 	}
 }

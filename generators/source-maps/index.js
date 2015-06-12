@@ -8,9 +8,12 @@ module.exports = generators.Base.extend({
 	prompting: function () {
 
 	},
-
-	writing: function() {
-
+	writing: {
+		config: util.copy(
+			'config/webpack/source-maps.webpack.config.js',
+			'source-maps.webpack.config.js'
+		),
+		manifest: util.manifest()
 	},
 	end: function() {
 

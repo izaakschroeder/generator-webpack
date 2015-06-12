@@ -1,0 +1,10 @@
+{
+	"dependencies": {
+		// For using node modules in the browsers
+		// This is used by webpack.
+		"node-libs-browser": "^0.5.2"
+	},
+	"devDependencies": {
+		"webpack": "^1.9.10"
+	}
+}

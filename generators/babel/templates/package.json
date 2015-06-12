@@ -1,9 +1,9 @@
 {
 	"dependencies": {
-
+		"babel-runtime": "^5.5.6"
 	},
 	"devDependencies": {
-		"webpack": "",
-		"babel-loader": "^1.1.1"
+		"babel-core": "^5.5.6",
+		"babel-loader": "^5.1.4"
 	}
 }

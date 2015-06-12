@@ -1,6 +1,5 @@
 {
 	"devDependencies": {
-		"webpack": "",
-		"source-map-support": ""
+		"source-map-support": "^0.3.1"
 	}
 }

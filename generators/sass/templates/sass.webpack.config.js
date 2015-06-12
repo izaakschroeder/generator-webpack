@@ -15,7 +15,7 @@ export default {
 				'css',
 				'autoprefixer?browsers=last 2 version',
 				'font',
-				'icon',
+				// 'icon', TODO: Enable me :D
 				'sass?precision=10&outputStyle=expanded&sourceMap=true'
 			]
 		}]
