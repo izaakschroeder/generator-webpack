@@ -1,10 +1,11 @@
 {
 	"name": "@metalab/generator-webpack",
 	"version": "0.1.0",
-	"description": "Setup eslint for your project.",
+	"description": "Setup webpack for your project.",
 	"author": "Izaak Schroeder <izaak.schroeder@gmail.com>",
 	"repository": "izaakschroeder/generator-webpack",
 	"license": "CC0-1.0",
+	"main": "./generators/app/index.js",
 	"dependencies": {
 		"yeoman-generator": "^0.20.1",
 		"yeoman-util": "^0.2.0"
