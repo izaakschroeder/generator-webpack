@@ -11,7 +11,10 @@ module.exports = generators.Base.extend({
 	},
 	writing: {
 		manifest: util.manifest(),
-		webpack: util.copy('webpack.config.js')
+		webpack: util.copy(
+			'~webpack.config.js',
+			'webpack.config.js'
+		)
 	},
 	end: function() {
 

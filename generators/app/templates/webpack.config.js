@@ -4,7 +4,7 @@ var fs = require('fs'),
 	path = require('path');
 
 function merge(destination, target) {
-	
+
 }
 
 /**
@@ -14,7 +14,7 @@ function merge(destination, target) {
  * @returns {Object} [description]
  */
 function load(config, dir) {
-	return glob.sync(dir).map(function(file) {
+	return glob.sync(dir, { realpath: true }).map(function(file) {
 		return require(file);
 	}).reduce(function load(local) {
 		return merge(config, local);
@@ -25,8 +25,11 @@ function load(config, dir) {
 require('babel-core/register');
 
 // Create initial configuration
+// -----------------------------------------------------
+// PLACE YOUR CODE HERE
+// -----------------------------------------------------
 var config = {
-
+	env: process.env.NODE_ENV || 'development'
 };
 
 // Load all the webpack settings

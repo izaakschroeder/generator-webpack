@@ -7,7 +7,7 @@ export default {
 	externals: {
 		// The key is the name of the module that you would normally require()
 		// and the value is the name of the global the script provides.
-		'<%-module%>': '<%-global%>'
+		'<%=module%>': '<%=global%>'
 	},
 
 	resolve: {
@@ -16,7 +16,7 @@ export default {
 		// but is used to handle automatically putting in the correct `<script>`
 		// tags for you.
 		externals: {
-			'<%-module%>': '<%-url%>'
+			'<%=module%>': '<%=url%>'
 		}
 	}
 
