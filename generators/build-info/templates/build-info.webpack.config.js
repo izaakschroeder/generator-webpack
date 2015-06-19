@@ -1,16 +1,12 @@
 
-
-import nearest from 'find-nearest-file';
 import path from 'path';
 import fs from 'fs';
 import Promise from 'bluebird';
 
-const root = nearest('package.json');
-
-function git(...args) {
+function git(root, ...args) {
 	return new Promise(function gitResolve(resolve, reject) {
 		execFile('git', args, {
-			cwd: self.path
+			cwd: root
 		}, function gitComplete(err, result) {
 			if (err) {
 				reject(err);
@@ -21,9 +17,9 @@ function git(...args) {
 	});
 }
 
-function pkg() {
+function pkg(root) {
 	return new Promise(function pkgResolve(resolve, reject) {
-		fs.readFile('package.json', 'utf8', function(err, data) {
+		fs.readFile(path.join(root, 'package.json'), 'utf8', function(err, data) {
 			let result = null;
 			if (err) {
 				return reject(err);
@@ -38,7 +34,33 @@ function pkg() {
 	});
 }
 
+function loader() {
+	const callback = this.async();
+	this.cacheable();
 
-export default function buildInfo() {
-	git('rev-parse', '--verify', 'HEAD')
+	const info = Promise.props({
+		commit: git(this.context, 'rev-parse', '--verify', 'HEAD'),
+		version: pkg(this.context).then(pkg => pkg.version)
+	});
+
+	info.then(function(result) {
+		return JSON.stringify(result);
+	}).nodeify(callback);
+}
+
+
+export default function buildInfo(options) {
+
+	return {
+		module: {
+			loaders: [{
+				name: 'build-info',
+				loader: loader
+			}]
+		},
+		alias: {
+			'build-info': 'build-info!json!' + options.context
+		}
+	};
+
 }

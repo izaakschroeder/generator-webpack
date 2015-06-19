@@ -15,6 +15,7 @@ Sub-generators
  * entry - Generate a config for an entrypoint.
  * external - Bundle an external resource.
  * hot - Hot module reload magic.
+ * json - JSON/JSON5 support.
  * progress - Show progress info as webpack build goes on.
  * sass - Add support for SASS stylesheets.
  * source-maps - Add sensible source-map support.
