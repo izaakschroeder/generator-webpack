@@ -1,4 +1,8 @@
 
+// TODO: What to do about node externals? e.g. it's not possible to load the
+// client stripe api node-side - just shim the global with an empty object?
+// let server-side code deal with it?
+
 export default {
 
 	// Externals are for all the libraries you DON'T want webpack to have the

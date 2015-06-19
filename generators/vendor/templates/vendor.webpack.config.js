@@ -1,4 +1,6 @@
 
+
+// See: http://clarkdave.net/2015/01/how-to-use-webpack-with-rails/
 import { optimize.CommonsChunkPlugin } from 'webpack';
 import fs from 'fs';
 
