@@ -1,66 +1,33 @@
 
+import { DefinePlugin } from 'webpack';
 import path from 'path';
 import fs from 'fs';
-import Promise from 'bluebird';
+import { execFileSync } from 'child_process';
 
+// If this fails with `fatal: Needed a single revision` it means you have not
+// yet committed anything to the repo.
 function git(root, ...args) {
-	return new Promise(function gitResolve(resolve, reject) {
-		execFile('git', args, {
-			cwd: root
-		}, function gitComplete(err, result) {
-			if (err) {
-				reject(err);
-			} else {
-				resolve(result.trim());
-			}
-		});
+	return execFileSync('git', args, {
+		cwd: root
 	});
 }
 
 function pkg(root) {
-	return new Promise(function pkgResolve(resolve, reject) {
-		fs.readFile(path.join(root, 'package.json'), 'utf8', function(err, data) {
-			let result = null;
-			if (err) {
-				return reject(err);
-			}
-			try {
-				result = JSON.parse(data)
-			} catch(parseError) {
-				return reject(parseError);
-			}
-			return resolve(result);
-		})
-	});
+	return JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 }
-
-function loader() {
-	const callback = this.async();
-	this.cacheable();
-
-	const info = Promise.props({
-		commit: git(this.context, 'rev-parse', '--verify', 'HEAD'),
-		version: pkg(this.context).then(pkg => pkg.version)
-	});
-
-	info.then(function(result) {
-		return JSON.stringify(result);
-	}).nodeify(callback);
-}
-
 
 export default function buildInfo(options) {
+	// TODO: Any other useful information?
+	const commit = git(options.context, 'rev-parse', '--verify', 'HEAD'),
+		version = pkg(options.context).version;
 
 	return {
-		module: {
-			loaders: [{
-				name: 'build-info',
-				loader: loader
-			}]
-		},
-		alias: {
-			'build-info': 'build-info!json!' + options.context
-		}
+		plugins: [
+			new DefinePlugin({
+				BUILD_COMMIT: JSON.stringify(commit),
+				BUILD_VERSION: JSON.stringify(version)
+			})
+		]
 	};
 
 }
