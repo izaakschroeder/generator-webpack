@@ -1,0 +1,6 @@
+{
+	"devDependencies": {
+		"yaml-loader": "^0.1.0",
+		"json5-loader": "^0.6.0"
+	}
+}
