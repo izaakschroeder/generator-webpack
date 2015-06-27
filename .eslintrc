@@ -4,29 +4,113 @@
 		"node": true
 	},
 
+	
 	// Use the power of babel for parsing. This allows for use of newer versions
 	// of Javascript and things like JSX.
 	"parser": "babel-eslint",
+	
 
+	// Additional linting plugins. To find more plugins to use search on npm
+	// for the keyword `eslintplugin`.
 	"plugins": [
-		"react"
+		
+		"filenames"
 	],
 
+	// When compiling for multiple environments having global conditionals
+	// replaced by webpack is handy (e.g. __CLIENT__, __SERVER__). Things
+	// like that should be listed here.
 	"globals": {
 
 	},
 
+	// For complete listing of rules and what they do, check out the docs.
+	// See: https://github.com/eslint/eslint/tree/master/docs/rules
 	"rules": {
+
+		// -----------------------------------------------------------------------
+		// Possible Errors
+		// -----------------------------------------------------------------------
+
+		
+		// For ES6 classes ensure they adhere to the spec.
+		"constructor-super": 2,
+		
+
+		// Enforce good documentation.
+		"valid-jsdoc": [2, {
+			"prefer": {
+				"return": "returns"
+			}
+		}],
+
+		// -----------------------------------------------------------------------
+		// Best Practices
+		// -----------------------------------------------------------------------
+
+		// Enforce a reasonable cap on functions spiralling out of control
+		// with many branches.
+		"complexity": [2, 10],
+
+		// If you have a switch block you should always cover all possible cases.
+		// Since Javascript has a shit type system we have to have a default case
+		// to check everything.
+		"default-case": 2,
+
+		// No one should be using for-in loops anyway.
+		"guard-for-in": 2,
+
+		// Don't allow people to do dumb things like "1." when they mean "1.0".
+		"no-floating-decimal": 2,
+
+		// Avoid funny things with parseInt.
+		// See: http://stackoverflow.com/questions/850341
+		"radix": 2,
+
+		// Since Javascript has fairly dumb scoping rules (functional scope instead
+		// of block scope) it's handy to know where your variables bleed into.
+		"vars-on-top": 2,
+
+		// Avoid pitfalls when trying to call a just-declared function.
+		"wrap-iife": 2,
+
+		// May the force be with you. Prevent accidental assignments.
+		"yoda": [0, "always"],
+
+		// -----------------------------------------------------------------------
+		// Strict Mode
+		// -----------------------------------------------------------------------
+
+		// Transpilers (webpack) deal with the effects of strict, so ignore it.
+		"strict": [2, "never"],
+
+		// -----------------------------------------------------------------------
+		// Variables
+		// -----------------------------------------------------------------------
+
+		// Common sense.
+		"no-use-before-define": 2,
+
+		
+		// Enforce `const` and `let` to describe what's going on.
+		"no-var": 2,
+
+		// Use `const` whenever possible.
+		"prefer-const": 2,
+		
+
+		// -----------------------------------------------------------------------
+		// Stylistic Issues
+		// -----------------------------------------------------------------------
+
 		// The one true brace style.
 		"brace-style": [2, "1tbs"],
 
-		//
-		"default-case": 2,
-
-		// Enforce case guidelines used in Javascript.
+		// Enforce case guidelines used in Javascript. No variables_like_this or
+		// VariablesLikeThis.
 		"camelcase": 2,
 
-		//
+		// Searching a file for `this` will pickup `_this` but not `self`.
 		"consistent-this": [2, "_this"],
 
 		// Prevent abbreviated blocks for clarity.
@@ -40,73 +124,65 @@
 		// See: http://stackoverflow.com/questions/729692
 		"eol-last": 2,
 
-		// Give functions names makes them easier to debug and follow in stack
-		// traces.
+		// Prevent people from naming their files in formats other than kebab-case.
+		// Rubyists have a bad habit of doing_this_for_js_files and others feel like
+		// variable naming conventionShouldMatchFiles. They're both wrong.
+		"filenames/filenames": [2, "^[a-z-]+$"],
+
+		// Giving functions names makes them easier to debug and follow in stack
+		// traces. Instead of "<anonymous>" everywhere you have names.
 		"func-names": 2,
+
+		// Avoid use of var x = function() { ... }.
 		"func-style": [2, "declaration"],
-		"guard-for-in": 2,
-		"key-spacing": [2, { "beforeColon": false, "afterColon": true }],
-		"new-cap": 0,
-		"no-floating-decimal": 2,
-		"no-lonely-if": 2,
-
-		// Who would do this?
-		"no-mixed-spaces-and-tabs": [2, true],
-
-		// Keep things clean.
-		"no-multiple-empty-lines": 2,
-
-		// Nested ternaries are just plain confusing. Avoiding them keeps the
-		// code readable.
-		"no-nested-ternary": 2,
-		"no-spaced-func": 2,
-		"no-use-before-define": 2,
-
-		"no-undefined": 2,
-
-		// There are no such thing as "private" properties. Use closure
-		// variables if you really need isolation.
-		"no-underscore-dangle": 0,
-
-		// Enforce `const` and `let` to describe what's going on.
-		"no-var": 2,
 
 		// Use the one true indentation scheme which just so happens to be
 		// tabs.
 		// See: http://programmers.stackexchange.com/questions/57
 		"indent": [2, "tab"],
 
+		// Things look nice "{ like: this }" and not "{like:this}".
+		"key-spacing": [2, { "beforeColon": false, "afterColon": true }],
+
+		// Sometimes you need to create objects from weird places. Maybe this
+		// can be removed by default.
+		"new-cap": 0,
+
+		// Prevent pointlessly nested if statements because they're harder to read.
+		"no-lonely-if": 2,
+
+		// Who would do this? Honestly.
+		"no-mixed-spaces-and-tabs": [2, true],
+
+		// Keep things clean by avoiding unnecessary spacing.
+		"no-multiple-empty-lines": 2,
+
+		// Nested ternaries are just plain confusing. Avoiding them keeps the
+		// code readable.
+		"no-nested-ternary": 2,
+
+		// Don't allow people to do stupid looking things like: foo (a, b). They
+		// should look like foo(a, b).
+		"no-spaced-func": 2,
+
+		// Generally you should be returning `null` instead of undefined. If you
+		// need to check for undefined values use `_.isUndefined()`.
+		"no-undefined": 2,
+
+		// There are no such thing as "private" properties. Use closure
+		// variables if you really need isolation.
+		"no-underscore-dangle": 0,
+
 		// Single quotes are faster to type and seem to be a fairly general
 		// convention in the JS community.
 		"quotes": [2, "single"],
 
-		// Avoid funny things with parseInt.
-		// See: http://stackoverflow.com/questions/850341
-		"radix": 2,
-
 		// Enforce whitespace for visual clarity.
 		"space-after-keywords": [2, "always"],
+
+		// Enforce whitespace because it looks nice.
 		"spaced-line-comment": 2,
 
-		// Transpilers deal with the effects of strict, so ignore it.
-		"strict": 0,
-
-		// Enforce good documentation.
-		"valid-jsdoc": [2, {
-			"prefer": {
-				"return": "returns"
-			}
-		}],
-
-		// Avoid pitfalls when trying to call a just-declared function.
-		"wrap-iife": 2,
-
-		// May the force be with you.
-		"yoda": [0, "always"],
-
-		
-		"react/jsx-uses-vars": 2,
-		"react/jsx-uses-react": 2
 		
 	}
 }
