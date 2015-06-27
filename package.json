@@ -8,6 +8,6 @@
 	"main": "./generators/app/index.js",
 	"dependencies": {
 		"yeoman-generator": "^0.20.1",
-		"yeoman-util": "^0.2.0"
+		"yeoman-util": "^0.3.2"
 	}
 }
