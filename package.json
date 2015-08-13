@@ -14,7 +14,7 @@
 		"lint": "./node_modules/.bin/eslint --ignore-path .gitignore ."
 	},
 	"devDependencies": {
-		"eslint": "^0.23.0",
+		"eslint": "^0.24.0",
 		"eslint-plugin-filenames": "^0.1.1",
 		"babel-eslint": "^3.1.11"
 	}
