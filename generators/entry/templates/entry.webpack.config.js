@@ -1,5 +1,6 @@
 
 import nearest from 'find-nearest-file';
+import partial from 'webpack-partial';
 import path from 'path';
 
 // No matter where we are, locate the canonical root of the project.
@@ -23,4 +24,8 @@ const config = {
 	}
 };
 
-export default config;
+// Extend the default webpack configuration with any partials you want.
+// e.g. partial(config, 'babel', 'compatibility');
+export default partial(
+	config
+);
