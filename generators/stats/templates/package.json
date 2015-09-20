@@ -1,5 +1,5 @@
 {
 	"devDependencies": {
-		"stats-webpack-plugin": "^0.1.2"
+		"stats-webpack-plugin": "^0.2.1"
 	}
 }
