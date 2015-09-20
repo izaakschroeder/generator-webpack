@@ -1,17 +1,77 @@
 
 import { HotModuleReplacementPlugin, NoErrorsPlugin } from 'webpack';
 
-// select appropriate hot loading code
-// e.g. hot-dev-server? depending on env
+function inject(entries, module) {
+	if (typeof entries === 'string') {
+		return [ ...module, entries ];
+	} else if (Array.isArray(entries)) {
+		return module.concat(entries);
+	} else if (typeof entries === 'object') {
+		const res = { };
+		for (const key in entries) {
+			res[key] = inject(entries[key], module);
+		}
+		return res;
+	} else {
+		throw new TypeError();
+	}
+}
 
-// allow hot reload of express? of stuff in s3? etc?
+function runtime(target) {
+	if (target === 'node') {
+		return [
+			'webpack-udev-server/hot/dev-server',
+			'webpack/hot/signal'
+		];
+	} else {
+		return [
+			'webpack-dev-server/client',
+			'webpack/hot/only-dev-server'
+		];
+	}
+}
 
-export default function hot() {
-	return {
-		plugins: [
-			new HotModuleReplacementPlugin(),
-			// Only for watch mode
-			new NoErrorsPlugin()
-		]
-	};
+export default function hot({ entry, target, context }) {
+	const env = process.env['NODE_ENV'] || 'development';
+
+	// Don't use HMR for anything but development.
+	if (env !== 'development') {
+		return { };
+	} else {
+		// Rewrite all the entry points to include HMR code.
+		return {
+			entry: inject(
+				entry,
+				runtime(target)
+			),
+			module: {
+				loaders: [{
+					name: 'babel',
+					query: {
+						plugins: [
+							'react-transform'
+						],
+						blacklist: [
+							// This does NOT work with `react-transform`
+							'optimisation.react.constantElements'
+						],
+						extra: {
+							'react-transform': [{
+								target: 'react-transform-webpack-hmr',
+								imports: [ 'react' ],
+								locals: [ 'module' ]
+							}]
+						}
+					}
+				}]
+			},
+			plugins: [
+				// Add webpack's HMR runtime.
+				new HotModuleReplacementPlugin(),
+
+				// Don't generate bundles with errors so HMR doesn't bomb the app.
+				new NoErrorsPlugin()
+			]
+		};
+	}
 }
