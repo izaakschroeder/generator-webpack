@@ -1,10 +1,10 @@
-import StatsPlugin from 'stats-webpack-plugin';
-import path from 'path';
 
-export default function stats(options) {
+import StatsPlugin from 'stats-webpack-plugin';
+
+export default function stats() {
 	return {
 		plugins: [
-			new StatsPlugin(path.join(options.output.path, 'stats.json'), {
+			new StatsPlugin('stats.json', {
 				hash: true,
 				assets: false,
 				reasons: false,
