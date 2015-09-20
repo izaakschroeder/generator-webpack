@@ -17,8 +17,9 @@ const config = {
 	context: root,
 	// Output controls the settings for file generation.
 	output: {
+		<% if (target === 'node') { %>libraryTarget: 'commonjs2',<% }%>
 		filename: '<%=target === "node" ? "[name].js" : "[name].[hash].js"%>',
-		publicPath: '<%=target === "node" ? "/" : "/assets"%>',
+		<% if (target !== 'node') { %>publicPath: process.env['<%=name.toUpperCase()%>_URL'],<% }%>
 		path: path.join(root, 'build', '<%=name%>'),
 		chunkFilename: '[id].[hash].js'
 	}
