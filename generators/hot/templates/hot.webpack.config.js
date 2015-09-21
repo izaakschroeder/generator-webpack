@@ -57,7 +57,7 @@ export default function hot({ entry, target, context }) {
 						],
 						extra: {
 							'react-transform': [{
-								target: 'react-transform-webpack-hmr',
+								target: 'react-transform-hmr',
 								imports: [ 'react' ],
 								locals: [ 'module' ]
 							}]
