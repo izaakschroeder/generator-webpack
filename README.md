@@ -18,6 +18,7 @@ Sub-generators
  * json - JSON/JSON5 support.
  * progress - Show progress info as webpack build goes on.
  * sass - Add support for SASS stylesheets.
+ * sharp - Image pre-processing with sharp.
  * source-maps - Add sensible source-map support.
  * vendor - Bundle common code into a `vendor.js` file.
 
