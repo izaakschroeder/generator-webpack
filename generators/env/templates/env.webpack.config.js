@@ -8,17 +8,16 @@ import dotenv from 'dotenv';
 dotenv.load({ silent: true });
 
 export default function env() {
+  // Use bluebird long traces for development and testing
+  // See: https://github.com/petkaantonov/bluebird#error-handling
+  env.BLUEBIRD_DEBUG = env.NODE_ENV !== 'production';
 
-	// Use bluebird long traces for development and testing
-	// See: https://github.com/petkaantonov/bluebird#error-handling
-	env.BLUEBIRD_DEBUG = env['NODE_ENV'] !== 'production';
-
-	return {
-		plugins: [
-			// Export `process.env` to the app being built. Optimize your code by
-			// checking `NODE_ENV` and set things like config variables (e.g.
-			// `API_URL`).
-			new EnvironmentPlugin(Object.keys(process.env))
-		]
-	};
+  return {
+    plugins: [
+      // Export `process.env` to the app being built. Optimize your code by
+      // checking `NODE_ENV` and set things like config variables (e.g.
+      // `API_URL`).
+      new EnvironmentPlugin(Object.keys(process.env)),
+    ],
+  };
 }

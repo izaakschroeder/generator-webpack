@@ -1,11 +1,11 @@
 {
-	"devDependencies": {
-		"csswring": "^3.0.7",
-		"postcss-import": "^7.0.0",
-		"postcss-loader": "^0.6.0",
-		"postcss": "^5.0.2",
-		"autoprefixer-core": "^5.2.1",
-		"precss": "^0.3.0",
-		"lost": "^6.5.0"
-	}
+  "devDependencies": {
+    "csswring": "^3.0.7",
+    "postcss-import": "^7.0.0",
+    "postcss-loader": "^0.6.0",
+    "postcss": "^5.0.2",
+    "autoprefixer-core": "^5.2.1",
+    "precss": "^0.3.0",
+    "lost": "^6.5.0"
+  }
 }

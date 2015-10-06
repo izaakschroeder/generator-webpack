@@ -1,15 +1,15 @@
 {
-	"dependencies": {
-		"node-noop": "^0.0.1"
-	},
-	"devDependencies": {
-		"extract-text-webpack-plugin": "^0.8.1",
-		"sass-loader": "^1.0.2",
-		"style-loader": "^0.12.3",
-		"css-loader": "^0.14.5",
-		"font-loader": "^0.1.2",
-		// "icon-loader": "",
-		"autoprefixer-loader": "^2.0.0",
-		"node-sass": "^3.2.0"
-	}
+  "dependencies": {
+    "node-noop": "^0.0.1"
+  },
+  "devDependencies": {
+    "extract-text-webpack-plugin": "^0.8.1",
+    "sass-loader": "^1.0.2",
+    "style-loader": "^0.12.3",
+    "css-loader": "^0.14.5",
+    "font-loader": "^0.1.2",
+    // "icon-loader": "",
+    "autoprefixer-loader": "^2.0.0",
+    "node-sass": "^3.2.0"
+  }
 }
