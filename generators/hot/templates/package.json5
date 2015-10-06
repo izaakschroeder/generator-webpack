@@ -1,6 +1,6 @@
 {
-	"devDependencies": {
-		"babel-plugin-react-transform": "^1.0.5",
-		"react-transform-hmr": "^1.0.0",
-	}
+  "devDependencies": {
+    "babel-plugin-react-transform": "^1.0.5",
+    "react-transform-hmr": "^1.0.0",
+  }
 }

@@ -1,6 +1,6 @@
 {
-	"dependencies": {
-		"es5-shim": "^4.1.5",
-		"html5shiv": "^3.7.2"
-	}
+  "dependencies": {
+    "es5-shim": "^4.1.5",
+    "html5shiv": "^3.7.2"
+  }
 }
