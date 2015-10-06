@@ -8,7 +8,7 @@ function inject(entries, module) {
     return module.concat(entries);
   } else if (typeof entries === 'object') {
     const res = { };
-    for (const key in entries) {
+    for (const key of Object.keys(entries)) {
       res[key] = inject(entries[key], module);
     }
     return res;
@@ -22,18 +22,20 @@ function runtime(target) {
       'webpack-udev-server/hot/dev-server',
       'webpack/hot/signal',
     ];
+  } else if (target === 'web') {
+    return [
+      'webpack-udev-server/hot/dev-client',
+      'webpack/hot/only-dev-server',
+    ];
   }
-  return [
-    'webpack-dev-server/client',
-    'webpack/hot/only-dev-server',
-  ];
+  throw new TypeError();
 }
 
 export default function hot({ entry, target }) {
   const env = process.env.NODE_ENV || 'development';
 
   // Don't use HMR for anything but development.
-  if (env !== 'development') {
+  if (!process.env.HOT || env !== 'development') {
     return { };
   }
 
@@ -55,11 +57,16 @@ export default function hot({ entry, target }) {
             'optimisation.react.constantElements',
           ],
           extra: {
-            'react-transform': [{
-              target: 'react-transform-hmr',
-              imports: [ 'react' ],
-              locals: [ 'module' ],
-            }],
+            'react-transform': {
+              transforms: [{
+                transform: 'react-transform-hmr',
+                imports: [ 'react' ],
+                locals: [ 'module' ],
+              }, {
+                transform: 'react-transform-catch-errors',
+                imports: [ 'react', 'redbox-react' ],
+              }],
+            },
           },
         },
       }],

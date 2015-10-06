@@ -1,16 +1,10 @@
 
 import { EnvironmentPlugin } from 'webpack';
-import dotenv from 'dotenv';
-
-// Load values from .env files; also don't complain about any errors from not
-// being able to load the .env file since there are cases where that file most
-// likely should not exist.
-dotenv.load({ silent: true });
 
 export default function env() {
   // Use bluebird long traces for development and testing
   // See: https://github.com/petkaantonov/bluebird#error-handling
-  env.BLUEBIRD_DEBUG = env.NODE_ENV !== 'production';
+  process.env.BLUEBIRD_DEBUG = env.NODE_ENV !== 'production';
 
   return {
     plugins: [

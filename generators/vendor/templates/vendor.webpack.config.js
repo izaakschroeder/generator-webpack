@@ -4,9 +4,11 @@ import { optimize } from 'webpack';
 export default function({ target }) {
   return {
     externals: target === 'node' ? [(context, request, cb) => {
+			// TODO: Make this work properly.
+      if (/^[a-z\-0-9]+$/.test(request)) {
+        return cb(null, `commonjs ${request}`);
+      }
       cb();
-      // TODO: Externalize node vendor modules for server-side.
-      // cb(null, 'commonjs ' + request);
     }] : [ ],
     plugins: target !== 'node' ? [
       // This performs the actual bundling of all the vendor files into their

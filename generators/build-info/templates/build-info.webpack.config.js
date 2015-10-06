@@ -16,10 +16,14 @@ function pkg(root) {
   return JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 }
 
-export default function buildInfo(options) {
+export default function buildInfo({ context }) {
   // TODO: Any other useful information?
-  const commit = git(options.context, 'rev-parse', '--verify', 'HEAD');
-  const version = pkg(options.context).version;
+
+  // SOURCE_VERSION is set by Heroku. Can possibly be used by other build
+  // systems that send tarballs instead of git repos.
+  const commit = process.env.SOURCE_VERSION ||
+    git(context, 'rev-parse', '--verify', 'HEAD').toString('utf8');
+  const version = pkg(context).version;
 
   return {
     plugins: [
