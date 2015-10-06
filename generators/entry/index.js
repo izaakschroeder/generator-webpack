@@ -1,8 +1,7 @@
 
-var generators = require('yeoman-generator');
 var util = require('yeoman-util');
 
-module.exports = generators.Base.extend({
+module.exports = util.Base.extend({
   prompting: util.prompt([{
     name: 'name',
     type: 'input',
