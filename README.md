@@ -18,6 +18,7 @@ Sub-generators
  * json - JSON/JSON5 support.
  * postcss - Add support for postcss stylesheets.
  * progress - Show progress info as webpack build goes on.
+ * root - Make another folder act like `node_modules`.
  * sass - Add support for SASS stylesheets.
  * sharp - Image pre-processing with sharp.
  * source-maps - Add sensible source-map support.
