@@ -1,6 +1,6 @@
 {
 	"name": "@metalab/generator-webpack",
-	"version": "0.2.2",
+	"version": "0.3.0",
 	"description": "Setup webpack for your project.",
 	"author": "Izaak Schroeder <izaak.schroeder@gmail.com>",
 	"repository": "izaakschroeder/generator-webpack",
