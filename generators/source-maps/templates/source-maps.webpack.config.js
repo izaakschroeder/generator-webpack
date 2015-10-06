@@ -18,6 +18,6 @@ export default function sourcemaps(options) {
     // Use full source-maps for production builds. This also helps prevent
     // prying eyes from poking into the code by allowing the map file to be
     // hosted separately and privately (e.g. on S3).
-    devtool: env === 'production' ? 'source-map' : 'eval',
+    devtool: env === 'production' ? 'source-map' : 'eval-source-map',
   };
 }
