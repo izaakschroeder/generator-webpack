@@ -15,9 +15,19 @@ module.exports = util.Base.extend({
     message: 'Runtime environment',
   }]),
   writing: {
-    config: util.copy(
-      '~config/webpack/${name}.webpack.config.js',
-      'entry.webpack.config.js'
+    base: util.template(
+      function(data) {
+        return 'config/webpack/' + data.name + '.webpack.config.babel.js';
+      },
+      'loader.js',
+      { overwrite: false }
+    ),
+    entry: util.template(
+      function(data) {
+        return 'entry/' + data.name + '.entry.js';
+      },
+      'entry.js',
+      { overwrite: false }
     ),
     manifest: util.manifest(),
   },
