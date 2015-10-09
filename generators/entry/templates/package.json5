@@ -1,6 +1,5 @@
 {
-  "devDependencies": {
-    "find-nearest-file": "^1.0.0",
-    "webpack-partial": "^0.2.0"
+  "scripts": {
+    "build:${name}": "./node_modules/.bin/webpack --config config/webpack/${name}.webpack.config.babel.js"
   }
 }
