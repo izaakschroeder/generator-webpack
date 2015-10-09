@@ -2,9 +2,14 @@
 
 Scaffold common webpack patterns.
 
-```
+```sh
 npm install -g @metalab/generator-webpack
+# Setup webpack proper.
 yo @metalab/webpack
+# Create your first entry.
+yo @metalab/webpack:entry
+# Build the entry you just made.
+npm run build:name
 ```
 
 Sub-generators
@@ -16,12 +21,14 @@ Sub-generators
  * external - Bundle an external resource.
  * hot - Hot module reload magic.
  * json - JSON/JSON5 support.
+ * optimize - Enable UglifyJS support for production builds.
  * postcss - Add support for postcss stylesheets.
  * progress - Show progress info as webpack build goes on.
  * root - Make another folder act like `node_modules`.
  * sass - Add support for SASS stylesheets.
  * sharp - Image pre-processing with sharp.
  * source-maps - Add sensible source-map support.
+ * stats - Generate a `stats.json` file.
  * vendor - Bundle common code into a `vendor.js` file.
 
 The webpack structure is setup as follows:
@@ -36,10 +43,8 @@ The webpack structure is setup as follows:
   - entrypoint-1.webpack.config.js
   - entrypoint-2.webpack.config.js
   - ...
-- webpack.config.js
 ```
 
-The root `webpack.config.js` is responsible for building all entrypoints defined in `config/webpack`. Each entrypoint in `config/webpack` can incorporate as many partials as it desires to extend its functionality.
 
 Other thoughts:
  * https://www.npmjs.com/package/git-sha-webpack-plugin
