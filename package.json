@@ -7,7 +7,7 @@
 	"license": "CC0-1.0",
 	"main": "./generators/app/index.js",
 	"dependencies": {
-		"yeoman-util": "^0.5.0"
+		"yeoman-util": "^0.5.1"
 	},
 	"scripts": {
 		"lint": "./node_modules/.bin/eslint --ignore-path .gitignore ."
