@@ -1,6 +1,7 @@
 
 import nearest from 'find-nearest-file';
 import path from 'path';
+import { optimize } from 'webpack';
 
 // No matter where we are, locate the canonical root of the project.
 const root = path.dirname(nearest('package.json'));
@@ -28,5 +29,8 @@ export default function({ target, name }) {
         publicPath: process.env[`${name.toUpperCase()}_URL`],
       }),
     },
+    plugins: [
+      new optimize.OccurenceOrderPlugin(true),
+    ],
   };
 }
