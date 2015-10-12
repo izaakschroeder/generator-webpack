@@ -1,5 +1,5 @@
 {
   "scripts": {
-    "build:${name}": "./node_modules/.bin/webpack --config config/webpack/${name}.webpack.config.babel.js"
+    "build:${name}": "./node_modules/.bin/webpack --bail --config config/webpack/${name}.webpack.config.babel.js"
   }
 }
