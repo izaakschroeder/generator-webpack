@@ -7,5 +7,6 @@ module.exports = util.Base.extend({
       'config/webpack/partial/vendor.webpack.config.js',
       'vendor.webpack.config.js'
     ),
+    manifest: util.manifest(),
   },
 });

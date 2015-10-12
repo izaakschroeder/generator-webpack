@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "runtime-webpack-plugin": "^0.1.0"
+  }
+}
